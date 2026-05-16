@@ -1,6 +1,6 @@
 # Prompt Playground Tool
 
-An interactive CLI tool for experimenting with different AI models and prompt styles using the **Groq API**. This tool allows you to ask questions and receive responses in different "styles" (basic, teacher, reasoning) from various open-source LLMs.
+An interactive CLI prompt tool for experimenting with different AI models and prompt styles using the **Groq API** - my first LLM prayground tool. This tool allows you to ask questions and receive responses in different "styles" (basic, teacher, reasoning) from various open-source LLMs.
 
 ## Features
 
@@ -156,9 +156,9 @@ See `requirements.txt` for exact versions.
 
 **Solutions**:
 1. **Use a verified model** from [`available_ai_models.py`](available_ai_models.py):
-   - `qwen/qwen3-32b` ✓
-   - `openai/gpt--oss-20b` ✓
-   - `llama-3.3-70b-versatile` ✓
+   - `qwen/qwen3-32b`
+   - `openai/gpt--oss-20b`
+   - `llama-3.3-70b-versatile`
 
 2. **Check your Groq API key**:
    - Verify it's set correctly in `.env`
