@@ -1,0 +1,32 @@
+task = "summarization.blog"
+version = "0.1.0"
+description = "Fallback blog summarization prompt with minimal variables."
+required_variables = ["article_text"]
+
+[optional_variables]
+audience = "general readers"
+
+[output]
+response_format = "json_object"
+schema_name = "BlogSummaryFallback"
+
+[output.schema]
+type = "object"
+required = ["summary", "key_points"]
+additionalProperties = false
+
+[[messages]]
+role = "system"
+template = """
+You summarize blog articles for {audience}.
+Return only valid JSON with "summary" and "key_points".
+Do not include markdown or unsupported claims.
+"""
+
+[[messages]]
+role = "user"
+template = """
+Article:
+
+{article_text}
+"""

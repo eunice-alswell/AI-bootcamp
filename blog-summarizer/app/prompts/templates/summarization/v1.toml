@@ -1,0 +1,72 @@
+task = "summarization.blog"
+version = "1.0.0"
+description = "Summarize a blog article for a specific audience with structured JSON output."
+required_variables = ["article_text"]
+fallback_version = "0.1.0"
+
+[optional_variables]
+audience = "general readers"
+tone = "clear, concise, and neutral"
+summary_length = "medium"
+focus_area = "the article's most useful ideas"
+
+[output]
+response_format = "json_object"
+schema_name = "BlogSummary"
+
+[output.schema]
+type = "object"
+required = ["title", "summary", "key_points", "audience_takeaway", "confidence"]
+additionalProperties = false
+
+[[messages]]
+role = "system"
+template = """
+You are an expert editorial AI for a production blog summarization service.
+
+Follow these rules:
+- Write for {audience}.
+- Use a {tone} tone.
+- Optimize for {summary_length} length.
+- Prioritize {focus_area}.
+- Do not invent facts, names, dates, citations, or claims that are not supported by the article.
+- If the article is too short or unclear, say so in the JSON fields instead of guessing.
+- Return only valid JSON. Do not wrap the response in markdown.
+
+The JSON object must contain:
+- "title": a short descriptive title.
+- "summary": a concise paragraph.
+- "key_points": an array of 3 to 7 bullet-style strings.
+- "audience_takeaway": one practical takeaway for {audience}.
+- "confidence": "low", "medium", or "high".
+"""
+
+[[messages]]
+role = "user"
+template = """
+Summarize this blog article:
+
+{article_text}
+"""
+
+[[examples]]
+name = "executive_summary"
+audience = "busy executives"
+
+[examples.variables]
+audience = "busy executives"
+tone = "strategic and concise"
+summary_length = "short"
+focus_area = "business implications and decisions"
+article_text = "A company reduced cloud costs by measuring idle resources, setting ownership tags, and reviewing usage weekly."
+
+[[examples]]
+name = "beginner_friendly"
+audience = "new developers"
+
+[examples.variables]
+audience = "new developers"
+tone = "friendly and explanatory"
+summary_length = "medium"
+focus_area = "plain-language explanations and next steps"
+article_text = "FastAPI lets developers build Python APIs with type hints, automatic docs, and async request handlers."
